@@ -9,4 +9,10 @@ int main()
     prb.displayProblem();
     Solution sol = prb.BruteForce_2machine();
     sol.displaySolution();
+
+    sol = prb.LSAAlgorithm();
+    sol.displaySolution();
+
+    sol = prb.LPTAlgorithm();
+    sol.displaySolution();
 }

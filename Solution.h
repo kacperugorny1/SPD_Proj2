@@ -4,7 +4,9 @@
 #include <iostream>
 
 typedef enum {
-	bruteForce
+	bruteForce,
+	LSA,
+	LPT
 } SolutionType;
 
 class Solution

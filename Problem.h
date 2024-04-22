@@ -13,11 +13,17 @@
 class Problem
 {
 	int n;
+
 	std::vector<int> Pj;
 
 public:
 	Problem(int a, int limit);
+
 	Solution BruteForce_2machine();
+
+	Solution LSAAlgorithm();
+
+	Solution LPTAlgorithm();
 
 	void displayProblem();
 };
