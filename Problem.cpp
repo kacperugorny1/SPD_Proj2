@@ -33,8 +33,6 @@ Solution Problem::LSAAlgorithm() {
 	int time1 = 0;
 	int time2 = 0;
 	std::vector<int> tasks;
-	//std::vector<int> sortedPj = Pj;
-	//std::sort(sortedPj.begin(), sortedPj.end(), std::greater<int>);
 
 	for (int i = 0; i < n; i++) {
 		if (time1 <= time2) {
@@ -64,6 +62,8 @@ Solution Problem::LPTAlgorithm() {
 	for (int i = 0; i < n; i++) sortedTasks.push_back({ Pj[i], i });
 
 	std::sort(sortedTasks.begin(), sortedTasks.end(), customOperator1);
+
+	//for (int i = 0; i < n; i++) std::cout << sortedTasks[i].first << " " << sortedTasks[i].second << std::endl; //Sprawdzenie jest git
 
 	for (int i = 0; i < n; i++) {
 		if (time1 <= time2) {
