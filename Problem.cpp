@@ -29,7 +29,6 @@ Solution Problem::BruteForce_2machine()
 
 Solution Problem::LSAAlgorithm() {
 	int best_time;
-	int index = 0;
 	int time1 = 0;
 	int time2 = 0;
 	std::vector<int> tasks;
@@ -53,7 +52,6 @@ Solution Problem::LSAAlgorithm() {
 
 Solution Problem::LPTAlgorithm() {
 	int best_time;
-	int index = 0;
 	int time1 = 0;
 	int time2 = 0;
 	std::vector<std::pair<int, int>> sortedTasks;
@@ -81,6 +79,60 @@ Solution Problem::LPTAlgorithm() {
 
 	return sol;
 }
+
+Solution Problem::PD() {
+	int time = 0;
+	std::vector<int> tasks;
+	int kl = 0;
+	for (int i = 0; i < n; i++) kl += Pj[i];
+	kl = (int)floor(kl / 2 + 1);
+
+	int** T = new int* [n + 1];
+	for (int i = 0; i <= n; i++) T[i] = new int[kl];
+
+
+	//Wype³nienie pierwszej kolumny 1 a reszta 0
+	for (int j = 0; j <= n; j++) {
+		for (int k = 0; k <= kl; k++) {
+			if (k == 0) T[j][k] = 1;
+			else T[j][k] = 0;
+		}
+	}
+
+	//Uzupe³nienie
+	for (int j = 1; j <= n; j++) {
+		for (int k = 1; k <= kl; k++) {
+			if ((T[j - 1][k] == 1) || ((k >= Pj[j - 1]) && (T[j - 1][k - Pj[j - 1]] == 1)))
+				T[j][k] = 1;
+		}
+	}
+	
+	//Display
+	for (int i = 0; i <= n; i++) {
+		for (int j = 0; j <= kl; j++)
+			std::cout << T[i][j] << " ";
+		std::cout << std::endl;
+	}
+	
+	//backtrack
+	int k = kl;
+	while (k != 0) {
+		for (int i = 1; i <= n; i++) {
+			if (T[i][k] == 1) {
+				time += Pj[i - 1];
+				k = k - Pj[i - 1];
+				tasks.push_back(i - 1);
+				break;
+			}
+		}
+	}
+
+	Solution sol(PDalg, time);
+	for (int i = 0; i < tasks.size(); i++) sol.addToSolution(tasks[i]);
+
+	return sol;
+}
+
 
 void Problem::displayProblem()
 {

@@ -25,6 +25,8 @@ public:
 
 	Solution LPTAlgorithm();
 
+	Solution PD();
+
 	void displayProblem();
 };
 

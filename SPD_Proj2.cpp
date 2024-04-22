@@ -5,7 +5,7 @@
 
 int main()
 {
-    Problem prb(25,100);
+    Problem prb(5,10);
     prb.displayProblem();
     Solution sol = prb.BruteForce_2machine();
     sol.displaySolution();
@@ -14,5 +14,8 @@ int main()
     sol.displaySolution();
 
     sol = prb.LPTAlgorithm();
+    sol.displaySolution();
+
+    sol = prb.PD();
     sol.displaySolution();
 }

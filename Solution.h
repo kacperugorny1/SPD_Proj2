@@ -6,7 +6,8 @@
 typedef enum {
 	bruteForce,
 	LSA,
-	LPT
+	LPT,
+	PDalg
 } SolutionType;
 
 class Solution

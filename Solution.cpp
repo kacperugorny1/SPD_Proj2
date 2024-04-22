@@ -13,6 +13,7 @@ void Solution::displaySolution() {
 	if (this->criterion == bruteForce) std::cout << "Brute forced" << std::endl;
 	if (this->criterion == LSA) std::cout << "LSA" << std::endl;
 	if (this->criterion == LPT) std::cout << "LPT" << std::endl;
+	if (this->criterion == PDalg) std::cout << "PA" << std::endl;
 	std::cout << "solution: ";
 	for (int i = 0; i < solution.size(); i++) {
 		std::cout << solution[i] << " ";
