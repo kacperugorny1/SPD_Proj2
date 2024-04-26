@@ -32,7 +32,9 @@ int main()
     sol = PD(Problem, n);
     sol.displaySolution();
 
-    sol = PTASlgorithm(n/2 ,Problem, n);
+    sol = PTASAlgorithm(n / 2, Problem, n);
     sol.displaySolution();
 
+    sol = PTAS3Algorithm(n / 2, Problem, n);
+    sol.displaySolution();
 }

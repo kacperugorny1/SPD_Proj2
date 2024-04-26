@@ -72,7 +72,7 @@ Solution LSAAlgorithm(std::vector<int> Pj, int n) {
 	return sol;
 }
 
-Solution PTASlgorithm(int k, std::vector<int> Pj, int n)
+Solution PTASAlgorithm(int k, std::vector<int> Pj, int n)
 {
 	int time1 = 0, time2 = 0;
 	std::vector<std::pair<int, int>> sortedTasks;
@@ -91,6 +91,33 @@ Solution PTASlgorithm(int k, std::vector<int> Pj, int n)
 	sol.setCriterion(PTAS);
 	
 	
+	return sol;
+}
+
+Solution PTAS3Algorithm(int k, std::vector<int> Pj, int n)
+{
+	int time1 = 0, time2 = 0, time3 = 0;
+	std::vector<std::pair<int, int>> sortedTasks;
+	std::vector<int> prb;
+	std::vector<int> temp;
+	for (int i = 0; i < n; i++) sortedTasks.push_back({ Pj[i], i });
+	std::sort(sortedTasks.begin(), sortedTasks.end(), customOperator1);
+	for (int i = 0; i < k; i++) { prb.push_back(sortedTasks[i].first); time3 += prb.back(); }
+	Solution sol = BruteForce_3machine(prb, k);
+	temp = sol.getSolution();
+	for (int i = 0; i < temp.size(); ++i) time1 += prb[temp[i]];
+	temp = sol.getSolution2();
+	for (int i = 0; i < temp.size(); ++i) time2 += prb[temp[i]];
+	time3 = time3 - time1 - time2;
+	for (int i = k; i < n; i++) {
+		if (time1 <= time2 && time1 <= time3) { time1 += sortedTasks[i].first; sol.addToSolution(sortedTasks[i].second); }
+		else if (time1 >= time2 && time2 <= time3) { time2 += sortedTasks[i].first; sol.addToSolution2(sortedTasks[i].second); }
+		else time3 += sortedTasks[i].first;
+	}
+	sol.setFinishTime(max3(time1, time2, time3));
+	sol.setCriterion(PTAS3);
+
+
 	return sol;
 }
 

@@ -10,7 +10,8 @@ typedef enum {
 	PDalg,
 	PTAS,
 	FPTAS,
-	bruteForce3
+	bruteForce3,
+	PTAS3
 } SolutionType;
 
 class Solution
@@ -35,6 +36,7 @@ public:
 
 
 	std::vector<int> getSolution() { return solution; };
+	std::vector<int> getSolution2() { return solution2; };
 
 
 	void displaySolution();

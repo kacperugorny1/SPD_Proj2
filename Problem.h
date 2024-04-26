@@ -22,7 +22,9 @@
 
 	Solution LPTAlgorithm(std::vector<int> Pj, int n);
 
-	Solution PTASlgorithm(int k, std::vector<int> Pj, int n);
+	Solution PTASAlgorithm(int k, std::vector<int> Pj, int n);
+
+	Solution PTAS3Algorithm(int k, std::vector<int> Pj, int n);
 
 	Solution PD(std::vector<int> Pj, int n);
 
