@@ -84,9 +84,10 @@ Solution Problem::LPTAlgorithm() {
 Solution Problem::PD() {
 	int time = 0;
 	std::vector<int> tasks;
+	int sumPj = 0;
 	int kl = 0;
-	for (int i = 0; i < n; i++) kl += Pj[i];
-	kl = (int)floor(kl / 2 + 1);
+	for (int i = 0; i < n; i++) sumPj += Pj[i];
+	kl = (int)floor(sumPj / 2 + 1);
 
 	int** T = new int* [n + 1];
 	for (int i = 0; i <= n; i++) T[i] = new int[kl];
@@ -94,7 +95,7 @@ Solution Problem::PD() {
 
 	//Wype³nienie pierwszej kolumny 1 a reszta 0
 	for (int j = 0; j <= n; j++) {
-		for (int k = 0; k <= kl; k++) {
+		for (int k = 0; k < kl; k++) {
 			if (k == 0) T[j][k] = 1;
 			else T[j][k] = 0;
 		}
@@ -102,7 +103,7 @@ Solution Problem::PD() {
 
 	//Uzupe³nienie
 	for (int j = 1; j <= n; j++) {
-		for (int k = 1; k <= kl; k++) {
+		for (int k = 1; k < kl; k++) {
 			if ((T[j - 1][k] == 1) || ((k >= Pj[j - 1]) && (T[j - 1][k - Pj[j - 1]] == 1)))
 				T[j][k] = 1;
 		}
@@ -110,15 +111,16 @@ Solution Problem::PD() {
 	
 	//Display
 	for (int i = 0; i <= n; i++) {
-		for (int j = 0; j <= kl; j++)
+		for (int j = 0; j < kl; j++)
 			std::cout << T[i][j] << " ";
 		std::cout << std::endl;
 	}
 	
 	//backtrack
-	int k = kl;
+	int i;
+	int k = kl - 1;
 	while (k != 0) {
-		for (int i = 1; i <= n; i++) {
+		for (i = 1; i <= n; i++) {
 			if (T[i][k] == 1) {
 				time += Pj[i - 1];
 				k = k - Pj[i - 1];
@@ -126,9 +128,11 @@ Solution Problem::PD() {
 				break;
 			}
 		}
+		if (i == n + 1) 
+			k--;
 	}
 
-	Solution sol(PDalg, time);
+	Solution sol(PDalg, sumPj - time);
 	for (int i = 0; i < tasks.size(); i++) sol.addToSolution(tasks[i]);
 
 	return sol;
