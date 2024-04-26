@@ -7,15 +7,18 @@ typedef enum {
 	bruteForce,
 	LSA,
 	LPT,
-	PDalg
+	PDalg,
+	PTAS,
+	FPTAS,
+	bruteForce3
 } SolutionType;
 
 class Solution
 {
 	std::vector<int> solution; // indexy
+	std::vector<int> solution2;
 	SolutionType criterion; // wykorzystane kryterium
 	int finish_time; //Czas
-	std::vector<int> solution_times; //czasy wykonywania dla kolejnych wyników
 
 public:
 
@@ -24,12 +27,15 @@ public:
 	~Solution() {};
 
 	void addToSolution(int a);
+	void addToSolution2(int a);
 
 	int getFinishTime() { return finish_time; };
+	void setFinishTime(int a) { finish_time = a; };
+	void setCriterion(SolutionType crit) { criterion = crit; };
+
 
 	std::vector<int> getSolution() { return solution; };
 
-	void addTimeToSoultion(int index);
 
 	void displaySolution();
 };

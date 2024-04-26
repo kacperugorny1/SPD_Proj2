@@ -1,18 +1,24 @@
 #include "Problem.h"
 
+int max3(int a, int b, int c) {
+	return std::max(std::max(a, b), c);
+}
+
 struct {
 	bool operator()(std::pair<int, int> a, std::pair<int, int> b) { return a.first > b.first; }
 } customOperator1;
 
 
-Problem::Problem(int a, int limit) : n(a), Pj(std::vector<int>(n)){
+std::vector<int> Generate(int a, int limit){
+	std::vector<int> Pj(a);
 	srand(time(NULL));
 	for (int i = 0; i < a; i++) {
 		Pj[i] = rand() % limit + 1;
 	}
+	return Pj;
 }
 
-Solution Problem::BruteForce_2machine()
+Solution BruteForce_2machine(std::vector<int> Pj, int n)
 {
 	int best_time = std::numeric_limits<int>::max();
 	int64_t best_order = 0;
@@ -27,8 +33,23 @@ Solution Problem::BruteForce_2machine()
 
 	return sol;
 }
+Solution BruteForce_3machine(std::vector<int> Pj, int n)
+{
+	int best_time = std::numeric_limits<int>::max();
+	int64_trit best_order,x;
+	int time1, time2, time3;
+	for (int i = 0; i < powl(3, n); ++i, ++x) {
+		time1 = 0; time2 = 0; time3 = 0;
+		for (int j = 0; j < n; ++j) if ((x >> j) == 0) time1 += Pj[j]; else if ((x >> j) == 1) time2 += Pj[j]; else time3 += Pj[j];
+		if (max3(time1, time2, time3) < best_time) { best_time = max3(time1, time2, time3); best_order = x; }
+	}
+	Solution sol(bruteForce3, best_time);
+	for (int i = 0; i < n; ++i) { if ((best_order >> i) == 0) sol.addToSolution(i); else if ((best_order >> i) == 1) sol.addToSolution2(i); }
 
-Solution Problem::LSAAlgorithm() {
+	return sol;
+}
+
+Solution LSAAlgorithm(std::vector<int> Pj, int n) {
 	int best_time;
 	int time1 = 0;
 	int time2 = 0;
@@ -51,13 +72,34 @@ Solution Problem::LSAAlgorithm() {
 	return sol;
 }
 
-Solution Problem::LPTAlgorithm() {
+Solution PTASlgorithm(int k, std::vector<int> Pj, int n)
+{
+	int time1 = 0, time2 = 0;
+	std::vector<std::pair<int, int>> sortedTasks;
+	std::vector<int> prb;
+	for (int i = 0; i < n; i++) sortedTasks.push_back({ Pj[i], i });
+	std::sort(sortedTasks.begin(), sortedTasks.end(), customOperator1);
+	for (int i = 0; i < k; i++) { prb.push_back(sortedTasks[i].first); time2 += prb.back(); }
+	Solution sol = BruteForce_2machine(prb, k);
+	time1 = sol.getFinishTime();
+	time2 -= time1;
+	for (int i = k; i < n; i++) {
+		if (time1 <= time2) { time1 += sortedTasks[i].first; sol.addToSolution(sortedTasks[i].second); }
+		else time2 += sortedTasks[i].first; 
+	}
+	sol.setFinishTime(std::max(time1, time2));
+	sol.setCriterion(PTAS);
+	
+	
+	return sol;
+}
+
+Solution LPTAlgorithm(std::vector<int> Pj, int n) {
 	int best_time;
 	int time1 = 0;
 	int time2 = 0;
 	std::vector<std::pair<int, int>> sortedTasks;
 	std::vector<std::pair<int, int>> tasks;
-
 	for (int i = 0; i < n; i++) sortedTasks.push_back({ Pj[i], i });
 
 	std::sort(sortedTasks.begin(), sortedTasks.end(), customOperator1);
@@ -81,7 +123,7 @@ Solution Problem::LPTAlgorithm() {
 	return sol;
 }
 
-Solution Problem::PD() {
+Solution PD(std::vector<int> Pj, int n) {
 	int time = 0;
 	std::vector<int> tasks;
 	int sumPj = 0;
@@ -109,12 +151,12 @@ Solution Problem::PD() {
 		}
 	}
 	
-	//Display
-	for (int i = 0; i <= n; i++) {
-		for (int j = 0; j < kl; j++)
-			std::cout << T[i][j] << " ";
-		std::cout << std::endl;
-	}
+	////Display
+	//for (int i = 0; i <= n; i++) {
+	//	for (int j = 0; j < kl; j++)
+	//		std::cout << T[i][j] << " ";
+	//	std::cout << std::endl;
+	//}
 	
 	//backtrack
 	int i;
@@ -139,7 +181,9 @@ Solution Problem::PD() {
 }
 
 
-void Problem::displayProblem()
+
+
+void displayProblem(std::vector<int> Pj, int n)
 {
 
 	for (int i = 0; i < n; ++i) std::cout << Pj[i] << " ";
