@@ -14,9 +14,10 @@ Problem::Problem(int a, int limit) : n(a), Pj(std::vector<int>(n)){
 
 Solution Problem::BruteForce_2machine()
 {
-	int best_time = std::numeric_limits<int>::max(), best_order = 0;
+	int best_time = std::numeric_limits<int>::max();
+	int64_t best_order = 0;
 	int time1, time2;
-	for (int i = 0; i < powl(2,n)/2; ++i) {
+	for (int64_t i = 0; i < powl(2,n)/2; ++i) {
 		time1 = 0; time2 = 0;
 		for (int j = 0; j < n; ++j) if ((i >> j) & 1) time1 += Pj[j]; else time2 += Pj[j];
 		if (std::max(time1, time2) < best_time) { best_time = std::max(time1, time2); best_order = i; }
