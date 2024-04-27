@@ -121,6 +121,23 @@ Solution PTAS3Algorithm(int k, std::vector<int> Pj, int n)
 	return sol;
 }
 
+Solution FPTASAlgorithm(int k, std::vector<int> Pj, int n) {
+	std::vector<int> new_Pj;
+	std::vector<int> sol_vector;
+	int sumPj = 0;
+	int time = 0;
+	for (int i = 0; i < Pj.size(); i++) {
+		sumPj += Pj[i];
+		new_Pj.push_back(Pj[i] / k);
+	}
+	Solution sol = PD(new_Pj, n);
+	sol_vector = sol.getSolution();
+	for (int i = 0; i < sol_vector.size(); i++) time += Pj[sol_vector[i]];
+	sol.setCriterion(FPTAS);
+	sol.setFinishTime(sumPj - time);
+	return sol;
+}
+
 Solution LPTAlgorithm(std::vector<int> Pj, int n) {
 	int best_time;
 	int time1 = 0;

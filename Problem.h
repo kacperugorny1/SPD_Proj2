@@ -28,6 +28,8 @@
 
 	Solution PD(std::vector<int> Pj, int n);
 
+	Solution FPTASAlgorithm(int k, std::vector<int> Pj, int n);
+
 	void displayProblem(std::vector<int> Pj, int n);
 
 	struct trit {

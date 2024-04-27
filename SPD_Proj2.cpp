@@ -37,4 +37,7 @@ int main()
 
     sol = PTAS3Algorithm(n / 2, Problem, n);
     sol.displaySolution();
+
+    sol = FPTASAlgorithm(2, Problem, n);
+    sol.displaySolution();
 }
