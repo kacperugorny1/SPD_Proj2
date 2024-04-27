@@ -29,7 +29,7 @@ int main()
     sol = LPTAlgorithm(Problem, n);
     sol.displaySolution();
 
-    sol = PD(Problem, n);
+    sol = PDAlgorithm(Problem, n);
     sol.displaySolution();
 
     sol = PTASAlgorithm(n / 2, Problem, n);

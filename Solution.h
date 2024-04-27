@@ -11,7 +11,8 @@ typedef enum {
 	PTAS,
 	FPTAS,
 	bruteForce3,
-	PTAS3
+	PTAS3,
+	PDalg3
 } SolutionType;
 
 class Solution

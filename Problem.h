@@ -26,9 +26,11 @@
 
 	Solution PTAS3Algorithm(int k, std::vector<int> Pj, int n);
 
-	Solution PD(std::vector<int> Pj, int n);
+	Solution PDAlgorithm(std::vector<int> Pj, int n);
 
 	Solution FPTASAlgorithm(int k, std::vector<int> Pj, int n);
+
+	Solution PD3Algorithm(std::vector<int> Pj, int n)
 
 	void displayProblem(std::vector<int> Pj, int n);
 
