@@ -18,7 +18,7 @@ void Solution::displaySolution() {
 	if (this->criterion == PTAS3) std::cout << "PTAS 3 machine" << std::endl;
 	if (this->criterion == FPTAS) std::cout << "FPTAS" << std::endl;
 	if (this->criterion == PDalg3) std::cout << "PD 3 machine" << std::endl;
-	if (criterion == bruteForce3 || criterion == PTAS3) {
+	if (criterion == bruteForce3 || criterion == PTAS3 || criterion == PDalg3) {
 		std::cout << "solution1: ";
 		for (int i = 0; i < solution.size(); i++) {
 			std::cout << solution[i] << " ";
