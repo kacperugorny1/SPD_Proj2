@@ -233,7 +233,6 @@ Solution PD3Algorithm(std::vector<int> Pj, int n) {
 	
 	Solution sol = PDAlgorithm(3, Pj, n);
 	std::vector<int> tasks = sol.getSolution();
-
 	int j = tasks.size() - 1;
 	for (int i = 0; i < Pj.size(); i++) {
 
@@ -247,7 +246,6 @@ Solution PD3Algorithm(std::vector<int> Pj, int n) {
 			indexes.push_back(i);
 		}
 	}
-
 	Solution sol2 = PDAlgorithm(2, Pj2, Pj2.size());
 
 	std::cout << sumPj << "  " << sol.getFinishTime() << "  " << sol2.getFinishTime() << std::endl;
@@ -255,7 +253,7 @@ Solution PD3Algorithm(std::vector<int> Pj, int n) {
 	sol.setFinishTime(sol2.getFinishTime());
 
 	for (int i = 0; i < sol2.getSolution().size(); i++)
-		sol.addToSolution2(indexes[i]);
+		sol.addToSolution2(indexes[sol2.getSolution()[i]]);
 
 	sol.setCriterion(PDalg3);
 
@@ -267,6 +265,8 @@ Solution PD3Algorithm(std::vector<int> Pj, int n) {
 void displayProblem(std::vector<int> Pj, int n)
 {
 
-	for (int i = 0; i < n; ++i) std::cout << Pj[i] << " ";
+	for (int i = 0; i < n; ++i) std::cout << i << ":" << "\t";
+	std::cout << std::endl;
+	for (int i = 0; i < n; ++i) std::cout << Pj[i] << "\t";
 	std::cout << std::endl;
 }

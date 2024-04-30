@@ -6,7 +6,7 @@
 
 int main()
 {
-    int n = 16;
+    int n = 17;
     std::vector<int> Problem = Generate(n, 20);
     displayProblem(Problem, n);
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
