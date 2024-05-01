@@ -9,11 +9,11 @@ struct {
 } customOperator1;
 
 
-std::vector<int> Generate(int a, int limit){
+std::vector<int> Generate(int a, int start, int limit){
 	std::vector<int> Pj(a);
 	srand(time(NULL));
 	for (int i = 0; i < a; i++) {
-		Pj[i] = rand() % limit + 1;
+		Pj[i] = rand() % limit + start;
 	}
 	return Pj;
 }

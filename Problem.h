@@ -12,7 +12,7 @@
 #include "Solution.h"
 	
 
-	std::vector<int> Generate(int a, int limit);
+	std::vector<int> Generate(int a, int start, int limit);
 
 	Solution BruteForce_2machine(std::vector<int> Pj, int n);
 
