@@ -134,7 +134,7 @@ Solution FPTASAlgorithm(int k, std::vector<int> Pj, int n) {
 	sol_vector = sol.getSolution();
 	for (int i = 0; i < sol_vector.size(); i++) time += Pj[sol_vector[i]];
 	sol.setCriterion(FPTAS);
-	sol.setFinishTime(sumPj - time);
+	sol.setFinishTime((sumPj - time) > time ? sumPj - time: time);
 	return sol;
 }
 

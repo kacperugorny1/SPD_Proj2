@@ -24,7 +24,8 @@ class Solution
 
 public:
 
-	Solution(SolutionType crit, int time) { criterion = crit; finish_time = time; }
+	Solution(SolutionType crit, int time) : criterion(crit), finish_time(time) { };
+	Solution() {};
 
 	~Solution() {};
 
